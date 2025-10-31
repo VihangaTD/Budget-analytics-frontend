@@ -15,7 +15,7 @@ const excludeEndpoints = ["/login","/register","/status","/activate","/health"];
 //request interceptor
 axiosConfig.interceptors.request.use((config)=>{
     const shouldSkipToken = excludeEndpoints.some((endpoint)=>{
-        config.url?.includes(endpoint)
+        return config.url?.includes(endpoint)
     });
     if(!shouldSkipToken){
         const accessToken = localStorage.getItem("token");
