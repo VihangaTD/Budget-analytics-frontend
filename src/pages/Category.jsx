@@ -6,12 +6,14 @@ import { useEffect, useState } from "react";
 import axiosConfig from "../util/axiosConfig";
 import { API_ENDPOINTS } from "../util/ApiEndpoints";
 import toast from "react-hot-toast";
+import Modal from "../components/Modal";
+import AddCategoryForm from "../components/AddCategoryForm";
 
 const Category = () => {
   useUser();
 
   const[loading,setLoading] = useState(false);
-  const[categoryDate,setCategoryData] = useState([]);
+  const[categoryData,setCategoryData] = useState([]);
   const[openAddCategoryModal,setOpenAddCategoryModal] = useState(false);
   const[openEditCategoryModal,setOpenEditCategoryModal] = useState(false);
   const[selecctedCategory,setSelectedCategory] = useState(null);
@@ -43,20 +45,29 @@ useEffect(()=>{
   return (
     <Dashboard activeMenu="Category">
       <div className="my-5 mx-auto">
+
         {/* Add button to add category */}
         <div className="flex justify-between items-center mb-5">
           <h2 className="text-2xl font-semibold">All Categories</h2>
-          <button className="flex items-center cursor-pointer bg-green-100 p-2 rounded-lg text-green-600 font-semibold hover:bg-green-200 hover:text-green-700 transition-all duration-400 ease-in-out">
+          <button 
+            onClick={()=>setOpenAddCategoryModal(true)}
+            className="flex items-center cursor-pointer bg-green-100 p-2 rounded-lg text-green-600 font-semibold hover:bg-green-200 hover:text-green-700 transition-all duration-400 ease-in-out">
             <Plus size={15} />
             Add Category
           </button>
         </div>
 
         {/* Category list */}
-        <CategoryList categories={categoryDate}/>
+        <CategoryList categories={categoryData}/>
 
         {/* Adding category modal */}
-
+        <Modal 
+          title="Add Category"
+          isOpen={openAddCategoryModal}
+          onClose={()=>setOpenAddCategoryModal(false)}
+          >
+          <AddCategoryForm/>
+        </Modal >
         {/* updating category modal */}
       </div>
     </Dashboard>
