@@ -15,7 +15,7 @@ const Dashboard = ({ children, activeMenu }) => {
             <Sidebar activeMenu={activeMenu} />
           </div>
 
-          <div className="grow mx-5">{children}</div>
+          <div className="grow mx-5 min-h-screen">{children}</div>
         </div>
       )}
     </div>

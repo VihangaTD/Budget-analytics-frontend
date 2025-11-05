@@ -112,7 +112,7 @@ const handleUpdateCategory = async(updatedCategory)=>{
           <h2 className="text-2xl font-semibold">All Categories</h2>
           <button 
             onClick={()=>setOpenAddCategoryModal(true)}
-            className="flex items-center cursor-pointer bg-green-100 p-2 rounded-lg text-green-600 font-semibold hover:bg-green-200 hover:text-green-700 transition-all duration-400 ease-in-out">
+            className="mr-1 flex items-center cursor-pointer bg-green-100 p-2 rounded-lg text-green-600 font-semibold hover:bg-green-200 hover:text-green-700 transition-all duration-400 ease-in-out">
             <Plus size={15} />
             Add Category
           </button>
