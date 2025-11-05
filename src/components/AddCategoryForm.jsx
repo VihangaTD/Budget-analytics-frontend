@@ -1,14 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Input from "./Input";
 import EmojiPickerPopup from "./EmojiPickerPopup";
+import { LoaderCircle } from "lucide-react";
 
-const AddCategoryForm=()=>{
+const AddCategoryForm=({onAddCategory,initialCategoryData,isEditing})=>{
 
     const [category,setCategory] = useState({
         name:"",
         type:"income",
         icon:""
     })
+
+    const[loading,setLoading] = useState(false);
+
+    useEffect(()=>{
+        if(isEditing && initialCategoryData){
+            setCategory(initialCategoryData);
+        }else{
+            setCategory({name:"",type:"income",icon:""});
+        }
+    },[isEditing,initialCategoryData]);
 
     const categoryTypeOptions = [
         {value:"income", label:"Income"},
@@ -17,6 +28,15 @@ const AddCategoryForm=()=>{
 
     const handleChange=(key,value)=>{
         setCategory({...category,[key]:value})
+    }
+
+    const handleSubmit=async()=>{
+        setLoading(true);
+        try {
+            await onAddCategory(category);
+        } finally {
+            setLoading(false);
+        }
     }
 
     return(
@@ -41,6 +61,25 @@ const AddCategoryForm=()=>{
                 isSelect={true}
                 options={categoryTypeOptions}
             />
+
+            <div className="flex justify-end mt-6">
+                <button 
+                    type="button"
+                    onClick={handleSubmit}
+                    disabled={loading}
+                    className="flex py-1 px-2 rounded-lg text-white bg-yellow-500 hover:bg-yellow-600 duration-200 ease-in-out transition-all cursor-pointer ">
+                    {loading ?(
+                        <>
+                            <LoaderCircle className="w-4 h-4 animate-spin"/>
+                            {isEditing ? "Updating...":"Adding..."}
+                        </>
+                    ):(
+                        <>
+                            {isEditing ?"Update Category":"Add Category"}
+                        </>
+                    )}
+                </button>
+            </div>
         </div>
     )
 }
