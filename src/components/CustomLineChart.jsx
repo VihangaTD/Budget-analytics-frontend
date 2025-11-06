@@ -29,7 +29,7 @@ const CustomTooltip = ({ active, payload, coordinate }) => {
   const data = payload[0].payload;
   const { x, y } = coordinate;
 
-  const width = 240;
+  const width = 200;
   const height = 90 + data.items.length * 30;
 
   // GLUE TO DOT: 8px above dot
@@ -54,7 +54,7 @@ const CustomTooltip = ({ active, payload, coordinate }) => {
       }}
     >
       <p className="text-sm font-bold text-gray-800 mb-1">{data.date}</p>
-      <p className="text-2xl font-bold text-yellow-600 mb-4">
+      <p className="text-lg font-bold text-yellow-600 mb-4">
         {formatUSD(data.dailyTotal)}
       </p>
       <div className="space-y-2 max-h-40 overflow-y-auto">

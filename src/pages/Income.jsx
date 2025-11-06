@@ -6,7 +6,6 @@ import { API_ENDPOINTS } from "../util/ApiEndpoints";
 import toast from "react-hot-toast";
 import IncomeList from "../components/IncomeList";
 import Modal from "../components/Modal";
-import { FastForward, Plus } from "lucide-react";
 import AddIncomeForm from "../components/AddIncomeForm";
 import DeleteAlert from "../components/DeleteAlert";
 import IncomeOverview from "../components/IncomeOverview";
@@ -43,7 +42,7 @@ const Income=()=>{
         }
     }
 
-    //fetch caategories for income
+    //fetch categories for income
     const fetchIncomeCategory=async()=>{
         try {
             const response = await axiosConfig.get(API_ENDPOINTS.CATEGORY_BY_TYPE('income'));
@@ -109,6 +108,14 @@ const Income=()=>{
         }
     }
 
+    const handleDownloadIncomeDetails=()=>{
+        console.log("Download income details");
+    }
+
+    const handleEmailIncomeDetails=()=>{
+        console.log("Email income details");
+    }
+
     useEffect(()=>{
         fetchIncomeDetails();
         fetchIncomeCategory();
@@ -133,18 +140,17 @@ const Income=()=>{
                 <div className="grid grid-cols-1 gap-6">
                     <div>
                         {/* Overview for income with line chart */}
-                        <button 
-                            className="mr-1 flex items-center cursor-pointer bg-green-100 p-2 rounded-lg text-green-600 font-semibold hover:bg-green-200 hover:text-green-700 transition-all duration-400 ease-in-out"
-                            onClick={()=>setOpenAddIncomeModal(true)}    
-                        >
-                            <Plus size={15} className="text-lg"/> Add Income
-                        </button>
 
-                        <IncomeOverview transactions={incomeData}/>
+                        <IncomeOverview transactions={incomeData} onAddIncome={()=>setOpenAddIncomeModal(true)}/>
 
                     </div>
 
-                    <IncomeList transactions={incomeData} onDelete={(id)=>setOpenDeleteAlert({show:true,data:id})}/>
+                    <IncomeList 
+                        transactions={incomeData} 
+                        onDelete={(id)=>setOpenDeleteAlert({show:true,data:id})}
+                        onDownload={handleDownloadIncomeDetails}
+                        onEmail={handleEmailIncomeDetails}
+                    />
 
                     {/* Add income modal */}
                     <Modal
