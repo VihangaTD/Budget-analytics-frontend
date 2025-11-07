@@ -1,7 +1,7 @@
 // utils/prepareIncomeLineChartData.js
 import moment from 'moment';
 
-export const prepareIncomeLineChartData = (transactions) => {
+export const prepareLineChartData = (transactions) => {
   if (!transactions || transactions.length === 0) return [];
 
   const currentMonth = moment().format('YYYY-MM');
