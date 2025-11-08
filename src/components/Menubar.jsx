@@ -1,10 +1,11 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { AppContext } from "../context/AppContext";
 import { useNavigate } from "react-router-dom";
-import { X, Menu, User, LogOut, Sidebar } from "lucide-react";
+import { X, Menu, User, LogOut } from "lucide-react";
 import { assets } from "../assets/Assets.js";
+import Sidebar from "./Sidebar.jsx";
 
-const Menubar = (activeMenu) => {
+const Menubar = ({activeMenu}) => {
   const [openSideMenu, setOpenSideMenu] = useState(false);
   const [showDropDown, setShowDropDown] = useState(false);
   const dropdownRef = useRef(null);
@@ -49,12 +50,13 @@ const Menubar = (activeMenu) => {
         </button>
 
         <div className="flex items-center gap-2">
-          <img src={assets.logo} alt="logo" className="h-10 w-10" />
+          <img src={assets.logo} alt="logo" className="h-8 w-8 sm:h-10 sm:w-10" />
           <span className="text-lg font-medium text-black truncate">
             Budget Analytics
           </span>
         </div>
       </div>
+
       {/* right side-avatar photo */}
       <div className="relative" ref={dropdownRef}>
         <button
@@ -67,6 +69,7 @@ const Menubar = (activeMenu) => {
         {/* dropdown menu */}
         {showDropDown && (
           <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg border border-gray-200 py-1 z-50">
+
             {/* user information */}
             <div className="px-4 py-3 border-b border-gray-100">
               <div className="flex items-center gap-3">
@@ -98,7 +101,7 @@ const Menubar = (activeMenu) => {
 
       {/* mobile side menu */}
       {openSideMenu && (
-        <div className="fixed left-0 right-0 bg-white border-b border-gray-200 lg:hidden z-20 top-[73px]">
+        <div className="fixed left-0   bg-transparent border-b border-gray-200 lg:hidden z-20 top-[73px]">
           <Sidebar activeMenu={activeMenu} />
         </div>
       )}

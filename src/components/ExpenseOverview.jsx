@@ -12,7 +12,7 @@ const ExpenseOverview = ({ transactions, onAddExpense }) => {
   }, [transactions]);
 
   return (
-    <div className="bg-white shadow-lg rounded-2xl p-6 items-center justify-center">
+    <div className="bg-white shadow-lg rounded-2xl p-4 sm:p-6 items-center justify-center">
       <div className="flex items-center justify-between">
         <div>
           <h5 className="text-lg">Expense Overview</h5>
@@ -21,10 +21,10 @@ const ExpenseOverview = ({ transactions, onAddExpense }) => {
           </p>
         </div>
         <button
-          className="mr-1 flex items-center cursor-pointer bg-red-100 p-2 rounded-lg text-red-600 font-semibold hover:bg-red-200 hover:text-red-700 transition-all duration-400 ease-in-out"
+          className="mr-1 text-xs sm:text-base flex items-center cursor-pointer bg-red-100 p-2 rounded-lg text-red-600 font-semibold hover:bg-red-200 hover:text-red-700 transition-all duration-400 ease-in-out"
           onClick={onAddExpense}
         >
-          <Plus size={15} className="text-lg" /> Add Expense
+          <Plus size={15} className="text-sm sm:text-lg" /> Add Expense
         </button>
       </div>
       <div className="w-full mt-10">
