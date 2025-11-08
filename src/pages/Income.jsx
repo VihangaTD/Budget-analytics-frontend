@@ -108,12 +108,35 @@ const Income=()=>{
         }
     }
 
-    const handleDownloadIncomeDetails=()=>{
-        console.log("Download income details");
+    const handleDownloadIncomeDetails=async()=>{
+        try {
+            const response = await axiosConfig.get(API_ENDPOINTS.INCOME_EXCEL_DOWNLOAD,{responseType:"blob"});
+            let filename = "income_details.xlsx";
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement("a");
+            link.href = url;
+            link.setAttribute("download",filename);
+            document.body.appendChild(link);
+            link.click();
+            link.parentNode.removeChild(link);
+            window.URL.revokeObjectURL(url);
+            toast.success("Download income details successfully");
+        } catch (error) {
+            console.error("Error downloading income details");
+            toast.error(error.response?.data?.message || "Failed to download income");
+        }
     }
 
-    const handleEmailIncomeDetails=()=>{
-        console.log("Email income details");
+    const handleEmailIncomeDetails= async()=>{
+        try{
+            const response = await axiosConfig.get(API_ENDPOINTS.EMAIL_INCOME);
+            if(response.status === 200){
+                toast.success("Income details emailed successfully");
+            }
+        }catch(error){
+            console.error("Error emailing income details: ",error);
+            toast.error(error.response?.data?.message || "Failed to email income");
+        }
     }
 
     useEffect(()=>{

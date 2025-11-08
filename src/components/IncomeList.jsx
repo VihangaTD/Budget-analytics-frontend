@@ -8,18 +8,20 @@ const IncomeList=({transactions,onDelete,onDownload,onEmail})=>{
     const[loading,setLoading] = useState(false);
 
     const handleEmail=async()=>{
+        setLoading(true)
         try {
             await onEmail();
         } finally {
-            setLoading(true);
+            setLoading(false);
         }
     }
 
     const handleDownload=async()=>{
+        setLoading(true)
         try{
             await onDownload();
         } finally{
-            setLoading(true);
+            setLoading(false);
         }
     }
 
